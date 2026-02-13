@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Valentine 💖</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+
+        background: url("bg.png") no-repeat center center fixed;
+        background-size: cover;
+      }
+
+      .container {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      h1 {
+        font-size: 28px;
+        text-shadow: 2px 2px 8px black;
+      }
+
+      button {
+        padding: 12px 25px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        margin: 15px;
+        cursor: pointer;
+      }
+
+      #yesBtn {
+        background: #00c853;
+        color: white;
+      }
+      #noBtn {
+        background: #d50000;
+        color: white;
+        position: absolute;
+      }
+
+      #message {
+        display: none;
+        text-shadow: 2px 2px 8px black;
+      }
+
+      .heart {
+        position: absolute;
+        animation: float 5s linear infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-10vh);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <audio id="music" loop>
+      <source
+        src="c:\Users\abhis\Desktop\valentine\romantic.mp3.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <div class="container">
+      <h1>Juhi 💖<br />Will You Be My Valentine?</h1>
+
+      <button id="yesBtn">Yes ❤️</button>
+      <button id="noBtn">No 😜</button>
+
+      <h2 id="message">
+        You Are The Most Beautiful Chapter Of My Life 💖<br />
+        I Promise To Love You More With Every Heartbeat ❤️<br />
+        Happy Valentine’s Day, My Darling 💕😘
+      </h2>
+    </div>
+
+    <script>
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+      const message = document.getElementById("message");
+      const music = document.getElementById("music");
+
+      /* Move NO button */
+      noBtn.addEventListener("mouseover", moveBtn);
+      noBtn.addEventListener("touchstart", moveBtn);
+
+      function moveBtn() {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+      }
+
+      /* YES click */
+      yesBtn.addEventListener("click", () => {
+        message.style.display = "block";
+
+        music.currentTime = 0;
+        music.play().catch((err) => {
+          console.log("Playback blocked:", err);
+        });
+
+        startFireworks();
+      });
+
+      /* Floating Hearts */
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = 20 + Math.random() * 30 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+      setInterval(createHeart, 300);
+
+      /* Fireworks */
+      function startFireworks() {
+        for (let i = 0; i < 25; i++) {
+          const spark = document.createElement("div");
+          spark.innerHTML = "🎆";
+          spark.style.position = "absolute";
+          spark.style.left = Math.random() * 100 + "vw";
+          spark.style.top = Math.random() * 100 + "vh";
+          spark.style.fontSize = "30px";
+          document.body.appendChild(spark);
+
+          setTimeout(() => {
+            spark.remove();
+          }, 2000);
+        }
+      }
+    </script>
+  </body>
+</html>
